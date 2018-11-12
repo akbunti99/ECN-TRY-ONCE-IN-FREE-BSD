@@ -1692,6 +1692,11 @@ syncache_respond(struct syncache *sc, struct syncache_head *sch,
 		ip->ip_dst = sc->sc_inc.inc_faddr;
 		ip->ip_ttl = sc->sc_ip_ttl;
 		ip->ip_tos = sc->sc_ip_tos;
+		
+		if (sc->sc_flags & SCF_ECN) {
+			ip->ip_tos |= IPTOS_ECN_ECT0;			/* Enable ECT0 in IP header */
+ 			TCPSTAT_INC(tcps_ecn_ect0);
+		}
 
 		/*
 		 * See if we should do MTU discovery.  Route lookups are
