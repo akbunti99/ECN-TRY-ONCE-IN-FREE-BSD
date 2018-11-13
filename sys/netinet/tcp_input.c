@@ -1073,7 +1073,7 @@ findpcb:
 		if ((thflags & (TH_RST|TH_ACK|TH_SYN)) == TH_ACK) {
 
 			INP_INFO_RLOCK_ASSERT(&V_tcbinfo);
-			if(TH_ACK && TH_SYN)
+			if(TH_ACK && TH_SYN && IPTOS_ECN_CE)
 			TH_ECNECHO = 1;     /* for syn|ack */
 			/*
 			 * Parse the TCP options here because
