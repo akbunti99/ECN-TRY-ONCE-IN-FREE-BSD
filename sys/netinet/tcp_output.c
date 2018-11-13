@@ -1096,7 +1096,7 @@ send:
 	    tp->snd_nxt == tp->snd_max)
 		tp->snd_nxt--;
 	
-	/* If client has already sent a SYN and the client has to send SYN-ACK in reply while it is in LISTEN state */
+	/* If client has already sent a SYN and the server has to send SYN-ACK in reply while it is in LISTEN state */
 	if (tp->t_state == TCPS_SYN_RECEIVED && V_tcp_do_ecn == 1) {   
 		flags |= TH_ECE;				/* Send ECE=1 and CWR=0 in TCP header with SYN-ACK */
  		ip->ip_tos |= IPTOS_ECN_ECT0;			/* Enable ECT0 in IP header */
